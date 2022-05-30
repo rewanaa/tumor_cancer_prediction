@@ -32,12 +32,13 @@ class preprocess :
         df_input =  self.df.drop(columns=['diagnosis','Index'])
         df_output =  self.df['diagnosis']
         self.x_train , self.x_test , self.y_train , self.y_test = train_test_split(df_input,df_output, test_size=0.25, random_state=0)
-        
+        print(end='\n')
         print(self.x_train.shape)
         print(self.y_train.shape)
         print("-----------------")
         print(self.x_test.shape)
-        print(self.x_test.shape)
+        print(self.y_test.shape)
+        print(end='\n')
     
         
   

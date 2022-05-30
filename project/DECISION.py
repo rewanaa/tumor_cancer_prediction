@@ -9,29 +9,24 @@ import joblib
 
 
 class decision_tree:
-    def __init__ (self ,x_train , x_test , y_train ,  y_test , model_decision_filename ,result , y_pred_decision_test,model_1):
+    model_decision_filename = "decision_model_job_lib.job_lib"
+    result= []
+    y_pred_decision_test= []
+    model_1 = DecisionTreeClassifier(max_depth=2, random_state=0)
+         
+    def __init__ (self ,x_train , x_test , y_train ,  y_test ):
         self.x_train =x_train 
         self.x_test = x_test
         self. y_train= y_train 
         self.y_test=y_test
-        self.model_decision_filename = "decision_model_job_lib.job_lib" 
-        self.result= []
-        self.y_pred_decision_test= []
-        self.model_1 = DecisionTreeClassifier(max_depth=2, random_state=0)
-        
-        
-        
+      
     def classification_decision (self):
-            
-        
+                    
         self.model_1.fit(self.x_train, self.y_train)
         
-      
-
-
            # predicting train result
         y_pred_decision_train =  self.model_1.predict(self.x_train)
-    
+           
     # predicting test result
         self.y_pred_decision_test =  self.model_1.predict(self.x_test)
        
@@ -40,23 +35,43 @@ class decision_tree:
         
        # Making the Confusion Matrix for Logistic Regression
         decision_cm = confusion_matrix(self.y_test, self.y_pred_decision_test)
-   # model accuracy for each model
+      # model accuracy for each model
         decisiontree_accuracy = metrics.accuracy_score(self.y_test , self.y_pred_decision_test)
            
-           
-           # save model 
-        joblib.dump(  self.model_1, self.model_decision_filename)
-        print('Model is saved into to disk successfully')
+          
+       # save model 
         
-        print (self.y_pred_decision_test , self.model_1 , decisiontree_accuracy ,  decision_cm )
+        joblib.dump(  self.model_1, self.model_decision_filename)
+        print( end = '\n')
+        print('Model decision is saved into to disk successfully')
+        print( end = '\n')
+     
+        
+        
+        print("DECISION TREE MODEL ::  ")
+        print( end = '\n')
+        print ("predict is : " , self.y_pred_decision_test )
+        print( end = '\n')
+
+        print("accuracy is  : " , decisiontree_accuracy )
+        print( end = '\n')
+        print("confusion matrix is : " , decision_cm )
+        print( end = '\n')
+        print ("-------------------------------------------------------------")
         
            
      #load model    
     def load_decision(self):
         decision_model = joblib.load(self.model_decision_filename)
         self.result = decision_model.predict(self.x_test)
-        print(self.result)    
+        print("Decision predict is :: ")
+        print( end ='\n')
+        print("Decision predict is : " ,self.result)    
+        
+        print( end ='\n')
         print ("Decision tree Accuracy : " ,decision_model.score(self.x_test,self.y_test))
+        print( end = '\n')
+        print("...................................................................")
    
 
 
