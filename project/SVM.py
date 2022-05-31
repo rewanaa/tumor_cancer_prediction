@@ -7,8 +7,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 import joblib
 from preprocessing import preprocess
-
-
 class support_vector_machine:
     model2_filename = "svm_model_job_lib.job_lib" 
     result= []
@@ -49,16 +47,16 @@ class support_vector_machine:
         print ("----------------------------------------------------------------")
         
     #load model    
-    def load_svm(self):
+    def load_svm(self,test1):
         svm_model = joblib.load(self.model2_filename)
-        self.result = svm_model.predict(self.x_test)
-        print("svm predict result is :: " )
+        self.result = svm_model.predict(test1)
         print( end = '\n')
         print("Svm predict is : " , self.result)
         print( end = '\n')
-        print ("Svm Accuracy : " ,svm_model.score(self.x_test,self.y_test))
-        print( end = '\n')
         print(".................................................................")
+        
+        
+        
 
 
     

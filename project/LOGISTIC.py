@@ -6,13 +6,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn import metrics
 import joblib
+#max_iter=10000,
 class logistic__regression:
     model3_filename = "logistic_model_job_lib.job_lib" 
     y_pred_logistic_test =  []
     result =[]       
-    model3 = LogisticRegression()
+    model3 = LogisticRegression(random_state=0)
     def __init__ (self ,x_train , x_test , y_train , y_test):
-    
+        
         self.x_train =x_train 
         self.x_test = x_test
         self. y_train= y_train 
@@ -49,15 +50,12 @@ class logistic__regression:
         print( end = '\n')
         print("----------------------------------------------------------------")
 
-    def load_logistic(self):
+    def load_logistic(self,test1):
         logistic_model = joblib.load(self.model3_filename)
-        self.result = logistic_model.predict(self.x_test)
-        print ("Logistic predict result is ::  ")
+        self.result = logistic_model.predict(test1)
         print(end = '\n')
         print("Logistic predict is : " ,self.result)
         print( end = '\n')      
-        print ("Logistic Accuracy : " ,logistic_model.score(self.x_test,self.y_test))      
-        print( end = '\n')
         print("...................................................................")
 
 

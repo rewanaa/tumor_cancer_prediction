@@ -47,26 +47,30 @@ df1 = pd.read_csv(path1)
 #graph_obj1 = Graph(df1)
 #graph_obj1.pca()
 pre_obj1 = preprocess(df1)
-pre_obj1.cleaning()
-pre_obj1.split_fun()
+#pre_obj1.cleaning()
+#pre_obj1.split_fun()
+pre = pre_obj1.split_x_y()
 
-decision_obj1 = decision_tree(pre_obj1.x_train, pre_obj1.x_test, pre_obj1.y_train, pre_obj1.y_test)
-decision_obj1.load_decision()
+decision_obj.load_decision(pre)
+svm_obj.load_svm(pre)
+logistic_obj.load_logistic(pre)
+# decision_obj1 = decision_tree(pre_obj1.x_train, pre_obj1.x_test, pre_obj1.y_train, pre_obj1.y_test)
+# decision_obj.load_decision(df1)
 
-svm_obj1 = support_vector_machine(pre_obj1.x_train, pre_obj1.x_test,pre_obj1. y_train, pre_obj1.y_test)
-svm_obj1.load_svm()
+# svm_obj1 = support_vector_machine(pre_obj1.x_train, pre_obj1.x_test,pre_obj1. y_train, pre_obj1.y_test)
+# svm_obj1.load_svm(df1)
 
 
-logistic_obj1=logistic__regression(pre_obj1.x_train, pre_obj1.x_test, pre_obj1.y_train, pre_obj1.y_test)
-logistic_obj1.load_logistic()
+# logistic_obj1=logistic__regression(pre_obj1.x_train, pre_obj1.x_test, pre_obj1.y_train, pre_obj1.y_test)
+# logistic_obj1.load_logistic(df1)
 
 
 def voting_fun2():
     big_list=[]
-    for x in range(len(svm_obj1.result)):
-        big_list.append(svm_obj1.result[x] + logistic_obj1.result [x] + decision_obj1.result[x])
+    for x in range(len(svm_obj.result)):
+        big_list.append(svm_obj.result[x] + logistic_obj.result [x] + decision_obj.result[x])
         
-        if big_list[x] == 3 or big_list[x] == 2:
+        if big_list[x] > 1:
             big_list.pop()
             big_list.append("Cancer")
         else:
